@@ -10,7 +10,7 @@ const LayoutGeneral: FC<PropsWithChildren> = ({children}: PropsWithChildren) => 
 
     return (<>
             <Stack direction={"column"} height={'100%'}>
-                <GeneralHeader />
+                <GeneralHeader/>
                 <Box display={'flex'} flexGrow={1} justifyContent={'center'}>
                     {children}
                 </Box>
