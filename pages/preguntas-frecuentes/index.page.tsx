@@ -48,7 +48,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const faqsPage: NextPage<Props> = ({ faqs }) => {
-    const [expanded, setExpanded] = React.useState<number | false>();
+    const [expanded, setExpanded] = React.useState<number | false>(false);
     
     const handleChange =
         (panel: number) => (event: React.SyntheticEvent, newExpanded: boolean) => {
