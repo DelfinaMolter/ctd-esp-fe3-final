@@ -58,26 +58,27 @@ const FaqsPage: NextPage<Props> = ({ faqs }) => {
     return (
         <>
             <Head>
-                <title>FAQs</title>
-                <meta name="description" content="All the frequency questions"/>
+                <title>Preguntas Frecuentes</title>
+                <meta name="description" content="Aquí encontraras todas las preguntas frecuentes sobre la compra de los comics de Marvel."/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 
-            <BodySingle title={"FAQs page"}>
-            <div >
-                {faqs.map((faq) => (
-                    <div key={faq.id}>
-                        <Accordion expanded={expanded === faq.id} onChange={handleChange(faq.id)}>
-                            <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                                <Typography>{faq.question}</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>{faq.answer} </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                    </div>
-                ))}
-            </div>
+            <BodySingle title={"Preguntas Frecuentes"}>
+                <h3>Estas son las preguntas frecuentes que te pueden ayudar.</h3>
+                <div >
+                    {faqs.map((faq) => (
+                        <div key={faq.id}>
+                            <Accordion expanded={expanded === faq.id} onChange={handleChange(faq.id)}>
+                                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                                    <Typography>{faq.question}</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Typography>{faq.answer} </Typography>
+                                </AccordionDetails>
+                            </Accordion>
+                        </div>
+                    ))}
+                </div>
             </BodySingle>
         </>
     )
