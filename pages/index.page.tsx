@@ -1,8 +1,10 @@
 import type {NextPage} from 'next'
 import Head from 'next/head'
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
+import { getComics } from 'dh-marvel/services/marvel/marvel.service';
 
 const Index: NextPage = () => {
+    console.log(getComics(10,10))
     return (
         <>
             <Head>
