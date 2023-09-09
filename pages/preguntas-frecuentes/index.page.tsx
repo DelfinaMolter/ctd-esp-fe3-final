@@ -47,7 +47,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-const faqsPage: NextPage<Props> = ({ faqs }) => {
+const FaqsPage: NextPage<Props> = ({ faqs }) => {
     const [expanded, setExpanded] = React.useState<number | false>(false);
     
     const handleChange =
@@ -96,4 +96,4 @@ export const getStaticProps = async () => {
 
 }
 
-export default faqsPage
+export default FaqsPage
