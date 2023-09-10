@@ -13,10 +13,10 @@ export interface Data {
     limit: number
     total: number
     count: number
-    results: Result[]
+    results: Comic[]
 }
 
-export interface Result {
+export interface Comic {
     id: number
     digitalId: number
     title: string
