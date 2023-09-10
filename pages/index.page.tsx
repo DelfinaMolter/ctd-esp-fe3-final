@@ -2,7 +2,7 @@ import type {GetServerSideProps, NextPage} from 'next'
 import Head from 'next/head'
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { getComics } from 'dh-marvel/services/marvel/marvel.service';
-import { Comic, Comics } from 'interface/comics';
+import { Comics } from 'interface/comics';
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -35,7 +35,9 @@ const Index: NextPage<Props> = ({comics}) => {
             </Head>
 
             <BodySingle title={"Comics de Marvel"}>
-                <h3>Encontrá tu Comics Favorito.</h3>
+                <Typography gutterBottom variant="h6" component="div" align="center">
+                Encontrá tu Comics Favorito.
+                </Typography>
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12, xl: 12 }}>
                         {comics.data.results.map((comic, index) => (

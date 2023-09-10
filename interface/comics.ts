@@ -48,6 +48,12 @@ export interface Comic {
     events: Events
 }
 
+export interface ComicNormalized extends Comic{
+    price: number
+    oldPrice: number
+    stock: number
+}
+
 export interface Url {
     type: string
     url: string
