@@ -13,12 +13,18 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useRouter } from 'next/router';
 
 interface Props{
     comics:Comics;
 }
 
 const Index: NextPage<Props> = ({comics}) => {
+    const router = useRouter();
+
+    const handleClickDetail = (id: string) =>{
+        router.push(`/comics/${id}`);
+    };
 
     return (
         <>
@@ -51,7 +57,7 @@ const Index: NextPage<Props> = ({comics}) => {
                                         <ShoppingCartIcon/>
                                         Comprar
                                     </Button>
-                                    <Button size="small" variant="outlined" href={`${process.env.NODE_ENV ==='development'? process.env.LOCAL_URL: process.env.BASE_URL}comics/${String(comic.id)}`} >
+                                    <Button size="small" variant="outlined" onClick={()=>handleClickDetail(String(comic.id))} >
                                         Ver detalle
                                     </Button>
                                 </CardActions>
