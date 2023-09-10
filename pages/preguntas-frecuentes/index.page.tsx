@@ -60,7 +60,7 @@ const FaqsPage: NextPage<Props> = ({ faqs }) => {
             <Head>
                 <title>Preguntas Frecuentes</title>
                 <meta name="description" content="Aquí encontraras todas las preguntas frecuentes sobre la compra de los comics de Marvel."/>
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon" href="/favicon.png"/>
             </Head>
 
             <BodySingle title={"Preguntas Frecuentes"}>

@@ -25,20 +25,24 @@ const Index: NextPage<Props> = ({comics}) => {
     const handleClickDetail = (id: string) =>{
         router.push(`/comics/${id}`);
     };
+    const handleClickBuy = (id: string) =>{
+        router.push(`/checkout/${id}`);
+    }
+
 
     return (
         <>
             <Head>
                 <title>Comics de Marvel</title>
                 <meta name="description" content="Todos los comics de marvel"/>
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon" href="/favicon.png"/>
             </Head>
 
             <BodySingle title={"Comics de Marvel"}>
                 <Typography gutterBottom variant="h6" component="div" align="center">
                 Encontrá tu Comics Favorito.
                 </Typography>
-                <Box sx={{ flexGrow: 1 }}>
+                <Box sx={{ flexGrow: 1 , m:'20px auto 50px'}}>
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12, xl: 12 }}>
                         {comics.data.results.map((comic, index) => (
                             <Grid xs={4} sm={4} md={4} xl={3} key={comic.id}>
@@ -54,12 +58,14 @@ const Index: NextPage<Props> = ({comics}) => {
                                     {comic.title}
                                     </Typography>
                                 </CardContent>
-                                <CardActions sx={{}} >
-                                    <Button size="small" variant="outlined">
-                                        <ShoppingCartIcon/>
+                                <CardActions sx={{justifyContent:'space-between'}} >
+                                    <Button size="small" variant="outlined" onClick={()=>handleClickBuy(String(comic.id))}>
+                                        <ShoppingCartIcon  fontSize="small"/>
+                                        <Typography variant="body2" sx={{mt:'5px', ml:'5px'}}>
                                         Comprar
+                                        </Typography>
                                     </Button>
-                                    <Button size="small" variant="outlined" onClick={()=>handleClickDetail(String(comic.id))} >
+                                    <Button size="small" variant="outlined" onClick={()=>handleClickDetail(String(comic.id))} sx={{pt:'5px'}}>
                                         Ver detalle
                                     </Button>
                                 </CardActions>

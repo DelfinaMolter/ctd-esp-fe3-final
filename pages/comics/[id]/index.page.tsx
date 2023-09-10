@@ -5,7 +5,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { getComic, getComics } from 'dh-marvel/services/marvel/marvel.service';
 import { Comic, ComicNormalized } from 'interface/comics';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
+// import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
@@ -15,32 +15,42 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Link from 'next/link';
-import { List } from '@mui/icons-material';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+import { useRouter } from 'next/router';
 
 interface Props{
     comic: ComicNormalized
 }
 
 const ComicPage: NextPage<Props> = ({comic}) => {
-    
+    const router = useRouter();
+
+    const handleClickCharacter = (url: string) =>{
+        const id = getIdCaharacter(url)
+        router.push(`/personajes/${id}`);
+    };
+    const getIdCaharacter = (url: string) =>{
+        return url.slice((url.lastIndexOf('/'))+1)
+    }
+    const handleClickBuy = () =>{
+        const id = String(comic.id)
+        router.push(`/checkout/${id}`);
+    }
+
     return (
         <>
             <Head>
                 <title>Comic - {comic.title}</title>
                 <meta name="description" content={`Aquí encontraras el detalle del comic ${comic.title}`}/>
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon" href="/favicon.png"/>
             </Head>
 
             <BodySingle title={"Detalle del Comic"}>
-                <Card sx={{height: "100%" }} >
+                <Card sx={{display: 'flex', flexDirection:{ xs: 'column', sm:'row'}, margin: "20px auto 50px", maxWidth:"1000px"}} >
                     <CardMedia
                         component="img"
                         alt="Portada del comic"
-                        height="250"
+                        height="450"
+                        width= "auto"
                         image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
                     />
                     <CardContent>
@@ -57,44 +67,44 @@ const ComicPage: NextPage<Props> = ({comic}) => {
                         ? ""
                         : <Typography gutterBottom variant="body1" component="div"><b>Descripción: </b> {comic.description}</Typography> 
                         }
-                        {/* con descripcion: 1749 ; sin descripcion: 1689 ; descripcion en null: 1220 */}
+                        {/* IDs de Prueba: con descripcion: 1749 ; sin descripcion: 1689 ; descripcion en null: 1220 */}
                         {comic.characters.items.length > 0  
                         ?  <Accordion>
                                 <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
-                                id="panel1a-header"
+                                id="panel1a-header" sx={{ backgroundColor:'rgba(0, 0, 0, .03)'}}
                                 >
                                 <Typography>Personajes:</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                <nav aria-label="secondary mailbox folders">
-                                <List>
-                                {comic.characters.items.map((character, index)=>(
-                                    // <Button key={index}>
-                                    //     {character.name}
-                                    // </Button>
-                                    <ListItem disablePadding key={index}>
-                                        <ListItemButton>
-                                            <ListItemText primary={character.name} />
-                                        </ListItemButton>
-                                    </ListItem>
-                                ))
-                                }
-                                </List>
-                                </nav>
+                                <ul>
+                                    {comic.characters.items.map((character, index)=>(
+                                        <li key={index} style={{listStyleType:"none"}}>
+                                            <Button sx={{ justifyContent: "flex-start"}} onClick={()=>handleClickCharacter(character.resourceURI)}>
+                                                {character.name}
+                                            </Button>
+                                        </li>
+                                    ))
+                                    }
+
+                                </ul>
                                 </AccordionDetails>
                             </Accordion>
                         : "" 
                         }
-                        {/* con descripcion: 1749 ; sin descripcion: 1689 ; descripcion en null: 1220 */}
+                        {/* IDs de Prueba: con personajes: 1749 ; sin personajes: 82970  */}
+                        <Button size="small" variant="outlined" disabled={comic.stock <= 0 } sx={{m:"50px 0px 20px"}} onClick={()=>handleClickBuy()}>
+                            <ShoppingCartIcon/>
+                            Comprar
+                        </Button>
                     </CardContent>
-                    <CardActions sx={{}} >
+                    {/* <CardActions sx={{}} >
                         <Button size="small" variant="outlined" disabled={comic.stock <= 0 } >
                             <ShoppingCartIcon/>
                             Comprar
                         </Button>
-                    </CardActions>
+                    </CardActions> */}
                 </Card>
             </BodySingle>
         </>
@@ -127,7 +137,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			},
 		};
 	} catch (error) {
-		console.error('No se pudo obtener el personaje', error);
+		console.error('No se pudo obtener el comic', error);
 		return {
 			props: {
 				comic: {},
