@@ -30,7 +30,7 @@ export const getStaticPaths:GetStaticPaths = async () => {
     const comics = await getComics()
 
 	const paths = comics.data.results.flatMap((comic: Comic) =>
-    ({ params: { id: comic.id }})
+    ({ params: { id: String(comic.id) }})
 	);
 
 	return {
