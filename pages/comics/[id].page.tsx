@@ -32,7 +32,7 @@ const ComicPage: NextPage<Props> = ({comic}) => {
             <Head>
                 <title>Comic - {comic.title}</title>
                 <meta name="description" content={`Aquí encontraras el detalle del comic ${comic.title}`}/>
-                <link rel="icon" href="/favicon.png"/>
+                <link rel="icon" href="/favicon.ico"/>
             </Head>
 
             <BodySingle title={"Detalle del Comic"}>

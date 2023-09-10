@@ -31,7 +31,7 @@ const Index: NextPage<Props> = ({comics}) => {
             <Head>
                 <title>Comics de Marvel</title>
                 <meta name="description" content="Todos los comics de marvel"/>
-                <link rel="icon" href="/favicon.png"/>
+                <link rel="icon" href="/favicon.ico"/>
             </Head>
 
             <BodySingle title={"Comics de Marvel"}>
