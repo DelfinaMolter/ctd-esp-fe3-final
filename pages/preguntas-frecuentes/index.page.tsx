@@ -64,7 +64,7 @@ const FaqsPage: NextPage<Props> = ({ faqs }) => {
             </Head>
 
             <BodySingle title={"Preguntas Frecuentes"}>
-                <Typography gutterBottom variant="h6" component="div" align="center">
+                <Typography gutterBottom variant="h6" component="div" align="center" sx={{mb:"30px"}}>
                     Estas son las preguntas frecuentes que te pueden ayudar.
                 </Typography>
                 <div >

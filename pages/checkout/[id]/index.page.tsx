@@ -68,14 +68,15 @@ const CheckoutPage: NextPage = () => {
                             );
                         })}
                     </Stepper>
+                    <FormProvider {...method}>
                     <React.Fragment>
                         <form >
                             <Typography sx={{ mt: 2, mb: 1 }}>
-                                <FormProvider {...method}>
+                                
                                     {activeStep === 0 && <DatosPersonales />}
                                     {activeStep === 1 && <DireccionEntrega />}
                                     {activeStep === 2 && <DatosDelPago />}
-                                </FormProvider>
+                                
                             </Typography>
 
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -100,6 +101,7 @@ const CheckoutPage: NextPage = () => {
                             </Box>
                         </form>
                     </React.Fragment>
+                    </FormProvider>
                 </Box>
             </BodySingle>
         </>
