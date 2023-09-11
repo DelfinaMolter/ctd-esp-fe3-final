@@ -46,7 +46,7 @@ const Index: NextPage<Props> = ({comics}) => {
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12, xl: 12 }}>
                         {comics.data.results.map((comic, index) => (
                             <Grid xs={4} sm={4} md={4} xl={3} key={comic.id}>
-                            <Card sx={{ height: "100%"}} >
+                            <Card sx={{ height: "100%", display:"flex", flexDirection:"column" }} >
                                 <CardMedia
                                     component="img"
                                     alt="Portada del comic"
@@ -58,7 +58,7 @@ const Index: NextPage<Props> = ({comics}) => {
                                     {comic.title}
                                     </Typography>
                                 </CardContent>
-                                <CardActions sx={{justifyContent:'space-between'}} >
+                                <CardActions sx={{justifyContent:'space-between', mt: "auto", mb:"5px", mx:"5px" }} >
                                     <Button size="small" variant="outlined" onClick={()=>handleClickBuy(String(comic.id))}>
                                         <ShoppingCartIcon  fontSize="small"/>
                                         <Typography variant="body2" sx={{mt:'5px', ml:'5px'}}>

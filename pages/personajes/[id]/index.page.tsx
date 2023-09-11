@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head'
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { getCharacter} from 'dh-marvel/services/marvel/marvel.service';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -25,7 +25,7 @@ const CharacterPage: NextPage<Props> = ({personaje}) => {
             </Head>
 
             <BodySingle title={"Detalle del Personaje"}>
-                <Card sx={{display: 'flex', flexDirection:{ xs: 'column', sm:'row'}, margin: "20px auto 50px", maxWidth:"1000px"}} >
+                <Card sx={{ margin: "20px auto 50px", maxWidth:"1000px"}} >
                     <CardMedia
                         component="img"
                         alt="Imagen del Personaje"
