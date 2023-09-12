@@ -39,7 +39,7 @@ export default function DatosDelPago() {
             <CustomTextField
                 name="expiredDate"
                 label="Fecha de expiración"
-                type="date"
+                type="text"
                 control={control}
                 defaultValue=""
             />
