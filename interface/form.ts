@@ -1,6 +1,5 @@
 export interface DataForm{
     datosPersonales: DatosPersonales
-    direccionEntrega: DireccionEntrega
     datosDelPago: DatosDelPago
 }
 
@@ -8,20 +7,33 @@ export interface DatosPersonales{
     name: string
     lastName: string
     email: string
+    address: DireccionEntrega
 }
 
+// export interface DataForm{
+//     datosPersonales: DatosPersonales
+//     direccionEntrega:DireccionEntrega
+//     datosDelPago: DatosDelPago
+// }
+
+// export interface DatosPersonales{
+//     name: string
+//     lastName: string
+//     email: string
+// }
+
 export interface DireccionEntrega{
-    address: string
-    apart: string
+    address1: string
+    address2: string
     city: string
-    province: string
-    cp: string
+    state: string
+    zipCode: string
 }
 
 export interface DatosDelPago{
-    cardNumber: number
-    completeName: string
-    expiredDate: string
-    secureCode: number
+    number: string
+    cvc: string
+    expDate: string
+    nameOnCard: string
 }
 

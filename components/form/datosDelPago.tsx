@@ -15,47 +15,47 @@ export default function DatosDelPago() {
             </Typography>
 
             <CustomTextField
-                name="cardNumber"
+                name="number"
                 label="Número de tarjeta"
                 type="number"
                 control={control}
                 defaultValue=""
             />
             <Typography variant="caption" color="red">
-                <ErrorMessage errors={errors} name="cardNumber" />
+                <ErrorMessage errors={errors} name="number" />
             </Typography>
 
             <CustomTextField
-                name="completeName"
+                name="cvc"
                 label="Nombre como aparece en la tarjeta"
                 type="text"
                 control={control}
                 defaultValue=""
             />
             <Typography variant="caption" color="red">
-                <ErrorMessage errors={errors} name="completeName" />
+                <ErrorMessage errors={errors} name="cvc" />
             </Typography>
 
             <CustomTextField
-                name="expiredDate"
+                name="expDate"
                 label="Fecha de expiración"
                 type="text"
                 control={control}
                 defaultValue=""
             />
             <Typography variant="caption" color="red">
-                <ErrorMessage errors={errors} name="expiredDate" />
+                <ErrorMessage errors={errors} name="expDate" />
             </Typography>
 
             <CustomTextField
-                name="secureCode"
+                name="nameOnCard"
                 label="Código de segurirar"
                 type="password"
                 control={control}
                 defaultValue=""
             />
             <Typography variant="caption" color="red">
-                <ErrorMessage errors={errors} name="secureCode" />
+                <ErrorMessage errors={errors} name="nameOnCard" />
             </Typography>
 
         </Container>

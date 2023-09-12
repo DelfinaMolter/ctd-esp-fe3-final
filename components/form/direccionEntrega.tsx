@@ -16,7 +16,7 @@ export default function DireccionEntrega() {
             </Typography>
 
             <CustomTextField
-                name="address"
+                name="address1"
                 label="Dirección"
                 type="text"
                 control={control}
@@ -27,14 +27,14 @@ export default function DireccionEntrega() {
             </Typography>
 
             <CustomTextField
-                name="apart"
+                name="address2"
                 label="Departamento, piso, etc"
                 type="text"
                 control={control}
                 defaultValue=""
             />
             <Typography variant="caption" color="red">
-                <ErrorMessage errors={errors} name="apart" />
+                <ErrorMessage errors={errors} name="address2" />
             </Typography>
 
             <CustomTextField
@@ -49,25 +49,25 @@ export default function DireccionEntrega() {
             </Typography>
 
             <CustomTextField
-                name="province"
+                name="state"
                 label="Provincia"
                 type="text"
                 control={control}
                 defaultValue=""
             />
             <Typography variant="caption" color="red">
-                <ErrorMessage errors={errors} name="province" />
+                <ErrorMessage errors={errors} name="state" />
             </Typography>
 
             <CustomTextField
-                name="cp"
+                name="zipCode"
                 label="Código postal"
                 type="text"
                 control={control}
                 defaultValue=""
             />
             <Typography variant="caption" color="red">
-                <ErrorMessage errors={errors} name="cp" />
+                <ErrorMessage errors={errors} name="zipCode" />
             </Typography>
         </Container>
 

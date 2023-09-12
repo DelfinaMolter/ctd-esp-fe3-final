@@ -4,8 +4,9 @@ import { DataForm} from "interface/form";
 export const ContextoFormulario = createContext<any>(undefined)
 
 const initialState = {
-    datosPersonales: null,
-    direccionEntrega: null,
+    datosPersonales: {
+        address: null
+    },
     datosDelPago: null
 }
 
@@ -22,7 +23,12 @@ const formReducer = (state:DataForm, action:any ) => {
         case 'ACTUALIZAR_DIRECCION_ENTREGA':
             return {
                 ...state,
-                direccionEntrega: { ...state.direccionEntrega, ...action.payload }
+                datosPersonales: {
+                    ...state.datosPersonales,
+                    direccionEntrega:{
+                        ...state.datosPersonales.address, ...action.payload
+                    }
+                }
             }
             break;
         case 'ACTUALIZAR_DATOS_DEL_PAGO':
