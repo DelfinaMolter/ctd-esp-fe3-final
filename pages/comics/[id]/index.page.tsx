@@ -127,10 +127,10 @@ export const getStaticPaths:GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	
-	const id = params?.id;
+	const id = Number(params?.id);
 
 	try {
-		const comic = await getComic(Number(id))
+		const comic = await getComic(id)
 		return {
 			props: {
 				comic,

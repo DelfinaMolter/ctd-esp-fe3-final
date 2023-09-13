@@ -5,9 +5,28 @@ export const ContextoFormulario = createContext<any>(undefined)
 
 const initialState = {
     datosPersonales: {
-        address: null
+        name: null,
+        lastname: null,
+        email: null,
+        address: {
+            address1: null,
+            address2: null,
+            city: null,
+            state: null,
+            zipCode: null
+        }
     },
-    datosDelPago: null
+    datosDelPago: {
+        number: null,
+        cvc: null,
+        expDate: null,
+        nameOnCard: null
+    },
+    order: {
+        name: null,
+        image: null,
+        price: null
+    }
 }
 
 const formReducer = (state:DataForm, action:any ) => {
@@ -35,6 +54,12 @@ const formReducer = (state:DataForm, action:any ) => {
             return {
                 ...state,
                 datosDelPago: { ...state.datosDelPago, ...action.payload }
+            }
+            break;
+        case 'ACTUALIZAR_ORDEN':
+            return {
+                ...state,
+                order: { ...state.order, ...action.payload }
             }
             break;
     }

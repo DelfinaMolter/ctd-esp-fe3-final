@@ -23,7 +23,7 @@ export default function DireccionEntrega() {
                 defaultValue=""
             />
             <Typography variant="caption" color="red">
-                <ErrorMessage errors={errors} name="address" />
+                <ErrorMessage errors={errors} name="address1" />
             </Typography>
 
             <CustomTextField

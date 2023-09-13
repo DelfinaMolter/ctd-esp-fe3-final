@@ -18,8 +18,8 @@ export type CheckoutInput = {
         nameOnCard: string
     },
     order: {
-        name: string;
-        image: string;
-        price: number;
+        name: string,
+        image: string,
+        price: number
     }
 }

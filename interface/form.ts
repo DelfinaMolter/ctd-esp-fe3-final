@@ -1,6 +1,7 @@
 export interface DataForm{
     datosPersonales: DatosPersonales
-    datosDelPago: DatosDelPago
+    datosDelPago: IDatosDelPago
+    order: Order
 }
 
 export interface DatosPersonales{
@@ -24,16 +25,22 @@ export interface DatosPersonales{
 
 export interface DireccionEntrega{
     address1: string
-    address2: string
+    address2: string | null
     city: string
     state: string
     zipCode: string
 }
 
-export interface DatosDelPago{
+export interface IDatosDelPago{
     number: string
     cvc: string
     expDate: string
     nameOnCard: string
+    focus?: string
 }
 
+export interface Order{
+    name: string,
+    image: string,
+    price: number
+}

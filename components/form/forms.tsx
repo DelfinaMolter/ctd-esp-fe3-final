@@ -7,20 +7,21 @@ import Button from '@mui/material/Button';
 import DatosPersonales from 'dh-marvel/components/form/datosPersonales';
 import DireccionEntrega from 'dh-marvel/components/form/direccionEntrega';
 import DatosDelPago from 'dh-marvel/components/form/datosDelPago';
-import Typography from '@mui/material/Typography';
 import { useFormContext } from "react-hook-form";
 
 const steps = ['Datos Personales', 'Dirección de entrega', 'Datos del pago'];
 
-export default function Form() {
-    const {handleSubmit} = useFormContext();
+
+
+export default function Forms() {
+    const {handleSubmit,  formState: {errors}} = useFormContext();
 
     const [activeStep, setActiveStep] = React.useState(0);
+
     const onSubmit = (data:any) => console.log(data)
 
     const handleNext = () => {
-        handleSubmit(onSubmit)
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setActiveStep((prevActiveStep) => prevActiveStep + 1)
     };
 
     const handleBack = () => {
@@ -28,12 +29,15 @@ export default function Form() {
     };
 
     const handleSend = () => {
-        setActiveStep(0);
+        if (confirm("Reset!") == true) {
+            setActiveStep(0);
+        }
+        
     };
 
     return(
         <Box sx={{ my: "40px"}}>
-            <Stepper activeStep={activeStep}>
+            <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map((label, index) => {
                     const stepProps: { completed?: boolean} = {};
                     return (
@@ -44,14 +48,14 @@ export default function Form() {
                 })}
             </Stepper>
             <React.Fragment>
-                <form >
-                    <Typography sx={{ mt: 2, mb: 1 }}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Box sx={{ mt: 2, mb: 1 }}>
                         
                             {activeStep === 0 && <DatosPersonales />}
                             {activeStep === 1 && <DireccionEntrega />}
                             {activeStep === 2 && <DatosDelPago />}
                         
-                    </Typography>
+                    </Box>
 
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                         <Button
@@ -65,10 +69,10 @@ export default function Form() {
                         </Button>
                     <Box sx={{ flex: '1 1 auto' }} />
                         {activeStep === steps.length - 1 
-                        ?   <Button  variant="outlined" onClick={handleSend}>
+                        ?   <Button type="submit" variant="outlined" onClick={handleSend}>
                                 Enviar
                             </Button>
-                        :  <Button  variant="outlined" onClick={handleNext}>
+                        :  <Button type="submit" variant="outlined" onClick={handleNext}>
                                 Siguiente
                             </Button>
                         }
@@ -79,3 +83,4 @@ export default function Form() {
 )
 
 }
+

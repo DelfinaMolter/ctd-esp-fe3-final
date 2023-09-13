@@ -1,4 +1,4 @@
-import type { NextPage} from 'next'
+import type { GetStaticPaths, GetStaticProps, NextPage} from 'next'
 import Head from 'next/head'
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import * as React from 'react';
@@ -7,16 +7,33 @@ import { schema } from "rules";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm} from "react-hook-form";
 import * as yup from "yup";
-import Form from 'dh-marvel/components/form/form';
+import Forms from 'dh-marvel/components/form/forms';
+import { getComic, getComics } from 'dh-marvel/services/marvel/marvel.service';
+import { Comic, ComicNormalized } from 'interface/comics';
+import LayoutCheckout from 'dh-marvel/components/layouts/layout-checkout';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-const CheckoutPage: NextPage = () => {
-	type DataForm = yup.InferType<typeof schema>;
+interface Props{
+    comic: ComicNormalized
+}
 
-	const method = useForm<DataForm>({
+
+const CheckoutPage:NextPage<Props> = ({comic}) => {
+	const router = useRouter();
+
+	type DataForms = yup.InferType<typeof schema>;
+
+	const method = useForm<DataForms>({
 		resolver: yupResolver(schema),
 		defaultValues: {},
 	});
 
+	useEffect(() => {
+		if(comic.stock == 0){
+			router.push(`/`);
+		}
+	},[]);
     
     return (
         <>
@@ -30,12 +47,52 @@ const CheckoutPage: NextPage = () => {
                 <Typography gutterBottom variant="h6" component="div" align="center">
                 Estas a pocos pasos de tener tu comic.
                 </Typography>
+                <Typography variant="body1" component="div" align="center">{comic.title}</Typography>
                 <FormProvider {...method}>
-                    <Form/>
+                    <Forms/>
                 </FormProvider>
             </BodySingle>
         </>
     )
 }
+
+export const getStaticPaths:GetStaticPaths = async () => {
+    const comics = await getComics()
+
+	const paths = comics.data.results.flatMap((comic: Comic) =>
+    ({ params: { id: String(comic.id) }})
+	);
+
+	return {
+		paths,
+		fallback: false
+	}
+
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	
+	const id = Number(params?.id);
+
+	try {
+		const comic = await getComic(id)
+		return {
+			props: {
+				comic,
+			},
+		};
+	} catch (error) {
+		console.error('No se pudo obtener el comic', error);
+		return {
+			props: {
+				comic: {},
+			}
+		}
+	}
+	
+};
+
+(CheckoutPage as any).Layout = LayoutCheckout
+
 
 export default CheckoutPage
