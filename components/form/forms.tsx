@@ -14,19 +14,38 @@ const steps = ['Datos Personales', 'Dirección de entrega', 'Datos del pago'];
 
 
 export default function Forms() {
-    const {handleSubmit,  formState: {errors}} = useFormContext();
+    const {handleSubmit, trigger, clearErrors} = useFormContext();
 
     const [activeStep, setActiveStep] = React.useState(0);
 
-    const onSubmit = (data:any) => console.log(data)
+    const onSubmit = (data:any) => {
+        console.log(data)
+    }
+    
 
-    const handleNext = () => {
+    const handleNext = async() => {
+        let hasError= true;
+        if(activeStep == 0){
+            hasError = await trigger(["name","lastname","email"])
+            console.log("paso 1: " + hasError)
+        }else if(activeStep == 1){
+            hasError = await trigger(["address1","address2","city","state","zipCode"])
+            console.log("paso 1: " + hasError)
+        }
+        if (!hasError){
+            console.log("no pase")
+            return
+        }
         setActiveStep((prevActiveStep) => prevActiveStep + 1)
+        clearErrors()
+        console.log("si pase")
+        
     };
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+
 
     const handleSend = () => {
         if (confirm("Reset!") == true) {

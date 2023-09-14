@@ -36,23 +36,30 @@ const CheckoutPage:NextPage<Props> = ({comic}) => {
 	},[]);
     
     return (
-        <>
-            <Head>
-                <title>Compra</title>
-                <meta name="description" content="Estas en proceso de compra."/>
-                <link rel="icon" href="/favicon.png"/>
-            </Head>
+		<>
+			<Head>
+				<title>Compra</title>
+				<meta name="description" content="Estas en proceso de compra."/>
+				<link rel="icon" href="/favicon.png"/>
+			</Head>
 
-            <BodySingle title={"Proceso de Compra"}>
-                <Typography gutterBottom variant="h6" component="div" align="center">
-                Estas a pocos pasos de tener tu comic.
-                </Typography>
-                <Typography variant="body1" component="div" align="center">{comic.title}</Typography>
-                <FormProvider {...method}>
-                    <Forms/>
-                </FormProvider>
-            </BodySingle>
-        </>
+
+			<BodySingle title={"Proceso de Compra"}>
+			{comic.stock == 0
+				?<Typography gutterBottom variant="h4" component="div" align="center"> No hay stock de este Comic.</Typography>
+				:
+				<>
+					<Typography gutterBottom variant="h6" component="div" align="center">
+					Estas a pocos pasos de tener tu comic.
+					</Typography>
+					<Typography variant="body1" component="div" align="center">{comic.title}</Typography>
+					<FormProvider {...method}>
+						<Forms/>
+					</FormProvider>
+				</>
+				}
+			</BodySingle>
+		</>
     )
 }
 

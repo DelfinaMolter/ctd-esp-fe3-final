@@ -41,14 +41,14 @@ export const schema = yup.object({
     .string()
     .required("Este campo es obligatorio")
     .matches(/^[0-9]{16}$/, "El número de la tarjeta debe tener 16 dígitos"),
-  cvc:  yup
-    .string()
-    .required("Este campo es obligatorio"),
+  nameOnCard: yup
+    .string().
+    required("Este campo es obligatorio"),
   expDate:  yup
     .string()
     .required("Este campo es obligatorio"),
-  nameOnCard: yup
-    .string().
-    required("Este campo es obligatorio")
+  cvc:  yup
+    .string()
+    .required("Este campo es obligatorio")
     .matches(/^[0-9]{3}$/, "el código de seguridad debe tener 3 dígitos"),
-})
+  })

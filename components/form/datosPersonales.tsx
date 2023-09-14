@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import { ErrorMessage } from '@hookform/error-message';
 import { CustomTextField } from "./Inputs/CustomTextField";
 import { useFormContext } from "react-hook-form";
+import FormGroup from '@mui/material/FormGroup';
 
 export default function DatosPersonales() {
 
@@ -15,38 +16,45 @@ export default function DatosPersonales() {
                 Ingresa tus datos personales.
             </Typography>
 
-            <CustomTextField
-                name="name"
-                label="Nombre"
-                type="text"
-                control={control}
-                defaultValue=""
-            />
-            <Typography variant="caption" color="red">
-                <ErrorMessage errors={errors} name="name" />
-            </Typography>
+            <FormGroup sx={{ mb: 2 }}>
+                <CustomTextField
+                    name="name"
+                    label="Nombre"
+                    type="text"
+                    control={control}
+                    defaultValue=""
+                />
+                <Typography variant="caption" color="red" >
+                    <ErrorMessage errors={errors} name="name" />
+                </Typography>
+            </FormGroup>
 
-            <CustomTextField
-                name="lastName"
-                label="Apellido"
-                type="text"
-                control={control}
-                defaultValue=""
-            />
-            <Typography variant="caption" color="red">
-                <ErrorMessage errors={errors} name="lastName" />
-            </Typography>
+            <FormGroup sx={{ mb: 2 }}>
+                <CustomTextField
+                    name="lastName"
+                    label="Apellido"
+                    type="text"
+                    control={control}
+                    defaultValue=""
+                />
+                <Typography variant="caption" color="red">
+                    <ErrorMessage errors={errors} name="lastName" />
+                </Typography>
+            </FormGroup>
 
-            <CustomTextField
-                name="email"
-                label="E-Mail"
-                type="email"
-                control={control}
-                defaultValue=""
-            />
-            <Typography variant="caption" color="red">
-                <ErrorMessage errors={errors} name="email" />
-            </Typography>
+            <FormGroup sx={{ mb: 2 }}>
+                <CustomTextField
+                    name="email"
+                    label="E-Mail"
+                    type="email"
+                    control={control}
+                    defaultValue=""
+                />
+                <Typography variant="caption" color="red">
+                    <ErrorMessage errors={errors} name="email" />
+                </Typography>
+            </FormGroup>
+
         </Container>
 
 	);
