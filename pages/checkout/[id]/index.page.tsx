@@ -54,7 +54,7 @@ const CheckoutPage:NextPage<Props> = ({comic}) => {
 					</Typography>
 					<Typography variant="body1" component="div" align="center">{comic.title}</Typography>
 					<FormProvider {...method}>
-						<Forms/>
+						<Forms comic={comic}/>
 					</FormProvider>
 				</>
 				}

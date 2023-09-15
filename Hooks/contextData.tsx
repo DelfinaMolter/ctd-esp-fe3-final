@@ -1,10 +1,13 @@
-import {  createContext, useContext, useReducer } from "react";
+import {  createContext, useContext, useReducer, useMemo, useState } from "react";
 import { DataForm, DatosForm} from "interface/form";
 
-export const ContextoFormulario = createContext<any>(undefined)
+
 
 const initialState = {
-    datosForm: { },
+    datos:{
+        datosForm: { },
+        order: {}
+    }
     // datosPersonales: {
     //     name: null,
     //     lastname: null,
@@ -23,45 +26,61 @@ const initialState = {
     //     expDate: null,
     //     nameOnCard: null
     // },
-    order: {
-        name: null,
-        image: null,
-        price: null
-    }
+    
 }
 
-const formReducer = (state:DatosForm, action:any ) => {
+export const ContextoFormulario = createContext<DatosForm | undefined>(undefined)
 
-    switch (action.type) {
-        case 'ACTUALIZAR_DATOS_PERSONALES':
-            return {
-                ...state,
-                datosForm: { ...state.datosForm, ...action.payload }
-            }
-            break;
+// const formReducer = (state:DatosForm, action:any ) => {
+
+//     switch (action.type) {
+//         case 'ACTUALIZAR_DATOS_PERSONALES':
+//             return {
+//                 ...state,
+//                 datosForm: { ...state.datosForm, ...action.payload }
+//             }
+//             break;
 
         
-        case 'ACTUALIZAR_ORDEN':
-            return {
-                ...state,
-                order: { ...state.order, ...action.payload }
-            }
-            break;
-        default :
-            return state
-    }
+//         case 'ACTUALIZAR_ORDEN':
+//             return {
+//                 ...state,
+//                 order: { ...state.order, ...action.payload }
+//             }
+//             break;
+//         default :
+//             return state
+//     }
 
-}
+// }
 
 export const FormularioProvider = ({ children }:any) => {
-    const [store, dispatch] = useReducer<any>(formReducer, initialState)
+    // const [store, dispatch] = useReducer<any>(formReducer, initialState)
+    const [datos, setdatos] = useState<DatosForm>(initialState.datos);
+    const value = useMemo(
+        () => ({
+            datos,
+            setdatos
+        }),
+        [datos]
+    );
 
     return (
-        < ContextoFormulario.Provider value={[store, dispatch]}>
+        < ContextoFormulario.Provider value={value}>
             {children}
         </ContextoFormulario.Provider >
     )
 }
 
-export const useStore = () => useContext(ContextoFormulario)[0]
-export const useDispatch = () => useContext(ContextoFormulario)[1]
+const useDatos = (): DatosForm => {
+    const context = useContext(ContextoFormulario);
+    if (!context) {
+        throw new Error('useDatos must be used within a ContextoFormulario');
+    }
+    return context;
+};
+
+export default useDatos;
+
+// export const useStore = () => useContext(ContextoFormulario)[0]
+// export const useDispatch = () => useContext(ContextoFormulario)[1]

@@ -4,8 +4,11 @@ export interface DataForm{
     order: Order
 }
 export interface DatosForm{
-    datosForm: PersonalData & DireccionEntrega & IDatosDelPago
-    order: Order
+    datos:{
+        datosForm: any
+        order: any
+    }
+    setModal:(modal: any) => void;
 }
 
 export interface DatosPersonales{

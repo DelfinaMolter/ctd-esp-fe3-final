@@ -4,7 +4,7 @@ import handleCheckout, {
     validCard,
     withoutAuthorizationCard,
     withoutFundsCard
-} from "dh-marvel/pages/api/checkout.route";
+} from "dh-marvel/pages/api/checkout/index.route";
 import {CheckoutInput} from "dh-marvel/features/checkout/checkout.types";
 import {
     ERROR_CARD_DATA_INCORRECT,
