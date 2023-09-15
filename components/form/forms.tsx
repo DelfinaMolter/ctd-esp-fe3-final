@@ -8,10 +8,8 @@ import DatosPersonales from 'dh-marvel/components/form/datosPersonales';
 import DireccionEntrega from 'dh-marvel/components/form/direccionEntrega';
 import DatosDelPago from 'dh-marvel/components/form/datosDelPago';
 import { useFormContext } from "react-hook-form";
-import { ContextoFormulario } from 'Hooks/contextData';
 import { ComicNormalized } from 'interface/comics';
 import { useRouter } from 'next/router';
-// import { useDispatch, useStore } from '../../Hooks/contextData';
 import Cookies from "js-cookie";
 
 const steps = ['Datos Personales', 'Dirección de entrega', 'Datos del pago'];
@@ -21,9 +19,6 @@ interface Props{
 }
 
 export default function Forms({comic}:Props) {
-    // const [store, dispatch] = React.useContext(ContextoFormulario)
-    // const dispatch = useDispatch()
-    // const store = useStore()
     const router = useRouter();
 
     const {handleSubmit, trigger, reset, formState, formState:{isSubmitSuccessful}} = useFormContext();
@@ -88,11 +83,6 @@ export default function Forms({comic}:Props) {
         //         "/confirmacion-compra"
         //     );
         // }
-        // console.log(store)
-        // dispatch({
-        //     type: "ACTUALIZAR_DATOS_PERSONALES",
-        //     payload: data
-        // })
     }
     
 

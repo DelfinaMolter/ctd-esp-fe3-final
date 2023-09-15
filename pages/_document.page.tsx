@@ -1,4 +1,4 @@
-// import { FormularioProvider } from 'Hooks/contextData'
+
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
@@ -11,13 +11,10 @@ export default function Document() {
                     
                 />
             </Head>
-            {/* <FormularioProvider> */}
-                <body style={{height: '100%'}}>
-                    <Main />
-                    <NextScript />
-                </body>
-            {/* </FormularioProvider> */}
-
+            <body style={{height: '100%'}}>
+                <Main />
+                <NextScript />
+            </body>
         </Html>
     )
 }
