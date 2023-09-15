@@ -12,7 +12,7 @@ export default function DireccionEntrega() {
 	return (
 
         <Container maxWidth="md">
-            <Typography align="center" variant="h5">
+            <Typography align="center" variant="h5"  sx={{ mb: 2 }}>
                 Ingresa tus datos de entrega.
             </Typography>
 

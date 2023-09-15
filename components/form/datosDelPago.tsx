@@ -35,7 +35,7 @@ export default function DatosDelPago() {
 	return (
 
         <Container maxWidth="md">
-            <Typography align="center" variant="h5">
+            <Typography align="center" variant="h5" sx={{ mb: 2 }}>
                 Ingresa los datos de Pago.
             </Typography>
 

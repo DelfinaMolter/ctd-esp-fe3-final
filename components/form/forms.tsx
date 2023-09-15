@@ -69,7 +69,6 @@ export default function Forms({comic}:Props) {
     }
 
     const onSubmit = async (data:any) => {
-        console.log(data)
         const dataNormalizada = normalizedData(data)
         const response = await fetch('/api/checkout', {
             method: 'POST',
@@ -80,7 +79,6 @@ export default function Forms({comic}:Props) {
             }
         })
         const responseApi = await response.json()
-        console.log(responseApi)
         if(response.ok){
             Cookies.set("accesoCompra", "true");
             router.push({

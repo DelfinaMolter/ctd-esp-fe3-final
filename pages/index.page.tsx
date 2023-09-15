@@ -14,19 +14,30 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useRouter } from 'next/router';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 interface Props{
     comics:Comics;
+    page: number 
 }
 
-const Index: NextPage<Props> = ({comics}) => {
+const LIMIT = 12;
+
+const Index: NextPage<Props> = ({comics, page}) => {
     const router = useRouter();
+    const [currentPage, setCurrentPage] = React.useState(1);
 
     const handleClickDetail = (id: string) =>{
         router.push(`/comics/${id}`);
     };
     const handleClickBuy = (id: string) =>{
         router.push(`/checkout/${id}`);
+    }
+
+    const handlChangesPage= (event: React.ChangeEvent<unknown>, value: number)=>{
+        setCurrentPage(value)
+        router.push(`/?page=${value}`);
     }
 
 
@@ -42,6 +53,10 @@ const Index: NextPage<Props> = ({comics}) => {
                 <Typography gutterBottom variant="h6" component="div" align="center">
                 Encontrá tu Comics Favorito.
                 </Typography>
+
+                <Stack spacing={2} sx={{mx:"auto"}}>
+                    <Pagination count={Math.ceil(comics.data.total/ LIMIT)} showFirstButton showLastButton onChange={handlChangesPage}/>
+                </Stack>
                 <Box sx={{ flexGrow: 1 , m:'20px auto 50px'}}>
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12, xl: 12 }}>
                         {comics.data.results.map((comic, index) => (
@@ -79,8 +94,10 @@ const Index: NextPage<Props> = ({comics}) => {
     )
 }
 
-export const getServerSideProps:GetServerSideProps = async ({req, res}) => {
-    const comics = await getComics(0,12);
+export const getServerSideProps:GetServerSideProps = async ({req, res, query}) => {
+    const page:any = query.page || 1
+    const offset = (page -1 ) * LIMIT
+    const comics = await getComics(offset,LIMIT);
     
     res.setHeader(
         'Cache-Control',

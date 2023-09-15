@@ -35,7 +35,7 @@ const CheckoutPage:NextPage<Props> = ({comic}) => {
 
 	useEffect(() => {
 		if(comic.stock == 0){
-			router.push(`/`);
+			router.push(`/comics/${router.query.id}`);
 		}
 	},[]);
     
