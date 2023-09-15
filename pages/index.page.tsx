@@ -24,9 +24,9 @@ interface Props{
 
 const LIMIT = 12;
 
-const Index: NextPage<Props> = ({comics, page}) => {
+const Index: NextPage<Props> = ({comics}) => {
     const router = useRouter();
-    const [currentPage, setCurrentPage] = React.useState(1);
+    const [page, setPage] = React.useState(1);
 
     const handleClickDetail = (id: string) =>{
         router.push(`/comics/${id}`);
@@ -36,7 +36,7 @@ const Index: NextPage<Props> = ({comics, page}) => {
     }
 
     const handlChangesPage= (event: React.ChangeEvent<unknown>, value: number)=>{
-        setCurrentPage(value)
+        setPage(value)
         router.push(`/?page=${value}`);
     }
 
