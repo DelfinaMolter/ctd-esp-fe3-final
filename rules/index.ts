@@ -46,7 +46,8 @@ export const schema = yup.object({
     required("Este campo es obligatorio"),
   expDate:  yup
     .string()
-    .required("Este campo es obligatorio"),
+    .required("Este campo es obligatorio")
+    .matches(/^[0-9]{4}$/, "la fecha debe ser dos digitos para el MES y dos digitos para el AÑO."),
   cvc:  yup
     .string()
     .required("Este campo es obligatorio")

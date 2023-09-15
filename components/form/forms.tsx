@@ -11,8 +11,15 @@ import { useFormContext } from "react-hook-form";
 import { ComicNormalized } from 'interface/comics';
 import { useRouter } from 'next/router';
 import Cookies from "js-cookie";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
 
 const steps = ['Datos Personales', 'Dirección de entrega', 'Datos del pago'];
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref,) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 interface Props{
     comic: ComicNormalized
@@ -21,9 +28,18 @@ interface Props{
 export default function Forms({comic}:Props) {
     const router = useRouter();
 
-    const {handleSubmit, trigger, reset, formState, formState:{isSubmitSuccessful}} = useFormContext();
+    const {handleSubmit, trigger} = useFormContext();
 
     const [activeStep, setActiveStep] = React.useState(0);
+    const [errorMsg, setErrorMsg] = React.useState("");
+
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+
+        setErrorMsg("");
+    };
 
     const normalizedData= (data:any) =>{
         return {
@@ -32,8 +48,7 @@ export default function Forms({comic}:Props) {
                 lastname: data.lastName,
                 email: data.email,
                 address: {
-                    address1: data.address,
-                    address2: data.address2,
+                    address2: data.address1 || 'invalid',
                     city: data.city,
                     state: data.state,
                     zipCode: data.zipCode
@@ -66,23 +81,22 @@ export default function Forms({comic}:Props) {
         })
         const responseApi = await response.json()
         console.log(responseApi)
-        // if(response.ok){
-        //     Cookies.set("access", "true", {
-        //         expires: 1,
-        //         path: "/confirmacion-compra",
-        //     });
-        //     router.push({
-        //         pathname: "/confirmacion-compra",
-        //         query: {
-        //             comicName: responseApi.data.order.name,
-        //             comicImage: responseApi.data.order.image,
-        //             comicPrice: responseApi.data.order.price,
-        //             userAddress: responseApi.data.customer.address.address1,
-        //         },
-        //     },
-        //         "/confirmacion-compra"
-        //     );
-        // }
+        if(response.ok){
+            Cookies.set("accesoCompra", "true");
+            router.push({
+                pathname: "/confirmacion-compra",
+                query: {
+                    comicName: responseApi.data.order.name,
+                    comicImage: responseApi.data.order.image,
+                    comicPrice: responseApi.data.order.price,
+                    userAddress: responseApi.data.customer.address.address2,
+                },
+            },
+                "/confirmacion-compra"
+            );
+        }else{
+            setErrorMsg(responseApi.message)
+        }
     }
     
 
@@ -105,13 +119,6 @@ export default function Forms({comic}:Props) {
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
-
-    React.useEffect(() => {
-        if (isSubmitSuccessful) {
-            reset()
-            setActiveStep(0);
-        }
-    }, [formState, isSubmitSuccessful, reset])
 
 
     return(
@@ -160,6 +167,11 @@ export default function Forms({comic}:Props) {
                     </Box>
                 </form>
             </React.Fragment>
+            <Snackbar open={!!errorMsg} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                    {errorMsg}
+                </Alert>
+            </Snackbar>
         </Box>
 )
 

@@ -13,6 +13,10 @@ import { Comic, ComicNormalized } from 'interface/comics';
 import LayoutCheckout from 'dh-marvel/components/layouts/layout-checkout';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { Box } from '@mui/material';
 
 interface Props{
     comic: ComicNormalized
@@ -52,10 +56,29 @@ const CheckoutPage:NextPage<Props> = ({comic}) => {
 					<Typography gutterBottom variant="h6" component="div" align="center">
 					Estas a pocos pasos de tener tu comic.
 					</Typography>
-					<Typography variant="body1" component="div" align="center">{comic.title}</Typography>
-					<FormProvider {...method}>
-						<Forms comic={comic}/>
-					</FormProvider>
+					{/* <Typography variant="body1" component="div" align="center">{comic.title}</Typography> */}
+					<Box  sx={{display: 'flex', flexDirection:{ xs: 'column', md:'row'}, gap:"30px", margin: "20px auto 50px", maxWidth:"1500px"}}>
+						<Card sx={{ maxWidth:"400px", height:"fit-content"}} >
+							<CardMedia
+								component="img"
+								alt="Portada del comic"
+								height="350"
+								width= "auto"
+								image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+							/>
+							<CardContent>
+								<Typography gutterBottom variant="h5" component="div">
+									{comic.title}
+								</Typography>
+								<Typography gutterBottom variant="h5" component="div" sx={{fontWeight:"bold"}}>
+									Precio: ${comic.price}
+								</Typography>
+							</CardContent>
+						</Card>
+						<FormProvider {...method}>
+							<Forms comic={comic}/>
+						</FormProvider>
+					</Box>
 				</>
 				}
 			</BodySingle>

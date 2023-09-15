@@ -4,17 +4,30 @@ import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import LayoutCheckout from 'dh-marvel/components/layouts/layout-checkout';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { Box } from '@mui/material';
+import Button from '@mui/material/Button';
 
 
 const ConfirmacionPage:NextPage = () => {
-	// const router = useRouter();
+	const router = useRouter();
 
-	// useEffect(() => {
-	// 	if(comic.stock == 0){
-	// 		router.push(`/`);
-	// 	}
-	// },[]);
+	const backToHome = ()=>{
+		Cookies.remove("accesoCompra");
+		router.push("/");
+	}
+	
+	React.useEffect(() => {
+		if (!Cookies.get("accesoCompra")) {
+			router.push("/");
+		}
+	}, [router]);
     
+	const { comicName, comicPrice, comicImage, userAddress } = router.query;
     return (
 		<>
 			<Head>
@@ -25,16 +38,31 @@ const ConfirmacionPage:NextPage = () => {
 
 
 			<BodySingle title={"Que disfrutes tu compra"}>
-			{/* {comic.stock == 0
-				?<Typography gutterBottom variant="h4" component="div" align="center"> No hay stock de este Comic.</Typography>
-				:
-				<> */}
-					<Typography variant="body1" component="div" align="center">
-                        datos
-                    </Typography>
-					
-				{/* </>
-				} */}
+				<Box  sx={{ margin: "20px auto 50px", maxWidth:"1500px"}}>
+					<Card sx={{ maxWidth:"400px", height:"fit-content"}} >
+						<CardMedia
+							component="img"
+							alt="Portada del comic"
+							height="350"
+							width= "auto"
+							image={`${comicImage}`}
+						/>
+						<CardContent>
+							<Typography gutterBottom variant="h5" component="div">
+								{comicName}
+							</Typography>
+							<Typography gutterBottom variant="h5" component="div" sx={{fontWeight:"bold"}}>
+								Precio: ${comicPrice}
+							</Typography>
+							<Typography gutterBottom variant="h5" component="div" sx={{fontWeight:"bold"}}>
+								Te llegara a : {userAddress}
+							</Typography>
+						</CardContent>
+					</Card>
+					<Button size="small" variant="outlined" sx={{m:"50px 0px 20px"}} onClick={()=>backToHome()}>
+						Volver a la Home
+					</Button>
+				</Box>
 			</BodySingle>
 		</>
     )
