@@ -3,6 +3,10 @@ export interface DataForm{
     datosDelPago: IDatosDelPago
     order: Order
 }
+export interface DatosForm{
+    datosForm: PersonalData & DireccionEntrega & IDatosDelPago
+    order: Order
+}
 
 export interface DatosPersonales{
     name: string
@@ -17,11 +21,11 @@ export interface DatosPersonales{
 //     datosDelPago: DatosDelPago
 // }
 
-// export interface DatosPersonales{
-//     name: string
-//     lastName: string
-//     email: string
-// }
+export interface PersonalData{
+    name: string
+    lastName: string
+    email: string
+}
 
 export interface DireccionEntrega{
     address1: string

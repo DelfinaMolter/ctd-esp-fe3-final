@@ -1,4 +1,4 @@
-import { FormularioProvider } from 'dh-marvel/components/form/contextData'
+import { FormularioProvider } from 'Hooks/contextData'
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {

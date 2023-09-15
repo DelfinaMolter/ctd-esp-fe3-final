@@ -7,7 +7,7 @@ import FormGroup from '@mui/material/FormGroup';
 
 export default function DatosPersonales() {
 
-    const {control, formState:{errors} }  = useFormContext();
+    const {control, formState:{errors}, trigger }  = useFormContext();
 
 	return (
 
@@ -23,6 +23,9 @@ export default function DatosPersonales() {
                     type="text"
                     control={control}
                     defaultValue=""
+                    onChange={()=>{
+                        trigger("name")
+                    }}
                 />
                 <Typography variant="caption" color="red" >
                     <ErrorMessage errors={errors} name="name" />
@@ -36,6 +39,9 @@ export default function DatosPersonales() {
                     type="text"
                     control={control}
                     defaultValue=""
+                    onChange={()=>{
+                        trigger("lastName")
+                    }}
                 />
                 <Typography variant="caption" color="red">
                     <ErrorMessage errors={errors} name="lastName" />
@@ -49,6 +55,9 @@ export default function DatosPersonales() {
                     type="email"
                     control={control}
                     defaultValue=""
+                    onChange={()=>{
+                        trigger("email")
+                    }}
                 />
                 <Typography variant="caption" color="red">
                     <ErrorMessage errors={errors} name="email" />

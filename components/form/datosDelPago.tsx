@@ -11,7 +11,7 @@ import { useState, ChangeEvent, FocusEvent, } from 'react';
 import FormGroup from '@mui/material/FormGroup';
 
 export default function DatosDelPago() {
-    const {control, formState:{errors} }  = useFormContext();
+    const {control, formState:{errors}, trigger }  = useFormContext();
 
     
     const [state, setState] = useState<IDatosDelPago>({
@@ -65,8 +65,9 @@ export default function DatosDelPago() {
                     type="text"
                     control={control}
                     defaultValue=""
-                    onChange = { (e) =>{
+                    onChange = {(e) =>{
                         handleInputChange(e)
+                        trigger("number")
                         } 
                     }
                     onFocus={handleInputFocus}
@@ -85,6 +86,7 @@ export default function DatosDelPago() {
                     defaultValue=""
                     onChange = { (e) =>{
                         handleInputChange(e)
+                        trigger("nameOnCard")
                         } 
                     }
                     onFocus={handleInputFocus}
@@ -103,6 +105,7 @@ export default function DatosDelPago() {
                     defaultValue=""
                     onChange = { (e) =>{
                         handleInputChange(e)
+                        trigger("expDate")
                         } 
                     }
                     onFocus={handleInputFocus}
@@ -121,6 +124,7 @@ export default function DatosDelPago() {
                     defaultValue=""
                     onChange = { (e) =>{
                         handleInputChange(e)
+                        trigger("cvc")
                         } 
                     }
                     onFocus={handleInputFocus}

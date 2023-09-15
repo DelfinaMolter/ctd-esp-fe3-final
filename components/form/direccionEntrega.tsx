@@ -23,6 +23,9 @@ export default function DireccionEntrega() {
                     type="text"
                     control={control}
                     defaultValue=""
+                    onChange={()=>{
+                        trigger("address1")
+                    }}
                 />
                 <Typography variant="caption" color="red">
                     <ErrorMessage errors={errors} name="address1" />
@@ -36,6 +39,9 @@ export default function DireccionEntrega() {
                     type="text"
                     control={control}
                     defaultValue=""
+                    onChange={()=>{
+                        trigger("address2")
+                    }}
                 />
                 <Typography variant="caption" color="red">
                     <ErrorMessage errors={errors} name="address2" />
@@ -49,6 +55,9 @@ export default function DireccionEntrega() {
                     type="text"
                     control={control}
                     defaultValue=""
+                    onChange={()=>{
+                        trigger("city")
+                    }}
                 />
                 <Typography variant="caption" color="red">
                     <ErrorMessage errors={errors} name="city" />
@@ -62,6 +71,9 @@ export default function DireccionEntrega() {
                     type="text"
                     control={control}
                     defaultValue=""
+                    onChange={()=>{
+                        trigger("state")
+                    }}
                 />
                 <Typography variant="caption" color="red">
                     <ErrorMessage errors={errors} name="state" />
@@ -75,6 +87,9 @@ export default function DireccionEntrega() {
                     type="text"
                     control={control}
                     defaultValue=""
+                    onChange={()=>{
+                        trigger("zipCode")
+                    }}
                 />
                 <Typography variant="caption" color="red">
                     <ErrorMessage errors={errors} name="zipCode" />
